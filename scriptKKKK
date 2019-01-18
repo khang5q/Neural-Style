@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#change settings under to your preferences and computing power
+a="IMG_"
+b=".jpg"
+c="IMG_"
+d=".png"
+e="adam"
+f="p.jpg"
+g="1024"
+for i in $(seq 1 10)
+
+do
+inputfile=$a$i$b
+outputfile=$c$i$d
+optimizer=$e
+style=$f
+size=$g
+
+th neural_style.lua -gpu 0 -backend cudnn -optimizer $optimizer -style_image ~/neural-style/examples/inputs/$style -content_image ~/neural-style/inputs/$inputfile -image_size $size -output_image ~/neural-style/outputs/$outputfile -num_iterations 1000 -save_iter 0 -cudnn_autotune
+echo $outputfile
+done
